@@ -10,7 +10,7 @@ export const instanceAxios = axios.create({
   },
 });
 
-export async function setCharities(payload) {
+export const setCharities = async (payload) => {
   try {
     const { data } = await instanceAxios.post('charities', payload);
     return data;
@@ -18,9 +18,9 @@ export async function setCharities(payload) {
     console.log('setCharities error ------------->>', error);
     return { message: `${error}`, status: 400 };
   }
-}
+};
 
-export async function getCharities() {
+export const getCharities = async () => {
   try {
     const { data } = await instanceAxios.get('charities');
     return data;
@@ -28,4 +28,14 @@ export async function getCharities() {
     console.log('getCharities error ------------->>', error);
     return { message: `${error}`, status: 400 };
   }
-}
+};
+
+export const setPayments = async (payload) => {
+  try {
+    const res = await instanceAxios.post('payments', payload);
+    console.log('res ------------->>', res);
+  } catch (error) {
+    console.log('setPayments error ------------->>', error);
+    return { message: `${error}`, status: 400 };
+  }
+};
