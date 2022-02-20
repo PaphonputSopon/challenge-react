@@ -16,7 +16,7 @@ export default connect((state) => state)(
       selectedAmount: 10,
     };
 
-    componentDidMount() {
+    async componentDidMount() {
       const self = this;
       fetch('http://localhost:3001/charities')
         .then(function (resp) {
@@ -58,16 +58,7 @@ export default connect((state) => state)(
           <Card key={i}>
             <p>{item.name}</p>
             {payments}
-            <button
-              onClick={handlePay.call(
-                self,
-                item.id,
-                self.state.selectedAmount,
-                item.currency
-              )}
-            >
-              Pay
-            </button>
+            <button onClick={handlePay.call(self, item.id, self.state.selectedAmount, item.currency)}>Pay</button>
           </Card>
         );
       });
