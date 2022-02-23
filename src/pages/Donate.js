@@ -1,15 +1,9 @@
 import React, { Component } from 'react';
 import fetch from 'isomorphic-fetch';
-import styled from 'styled-components';
 import { connect } from 'react-redux';
-import { summaryDonations } from '../utils/helpers';
-import CardComponent from '../components/CardComponent';
-import ButtonComponent from '../components/ButtonComponent';
-import { setPayments } from '../api';
-const Card = styled.div`
-  margin: 10px;
-  border: 1px solid #ccc;
-`;
+import { summaryDonations } from '../utils/Helpers';
+import { getCharities } from '../api/charities/charities';
+import CardComponent from '../components/BardComponent';
 
 class HomePage extends Component {
   constructor(props) {
@@ -40,63 +34,10 @@ class HomePage extends Component {
           amount: summaryDonations(data.map((item) => item.amount)),
         });
       });
-
-    setPayments({});
+    console.log(' API.Charities(); ------------->>', await getCharities());
   }
 
-  /**
-   * Handle pay button
-   * 
-   * @param {*} The charities Id
-   * @param {*} amount The amount was selected
-   * @param {*} currency The currency
-   * 
-   * @example
-   * fetch('http://localhost:3001/payments', {
-        method: 'POST',
-        body: `{ "charitiesId": ${id}, "amount": ${amount}, "currency": "${currency}" }`,
-      })
-  */
-  handlePay(id, amount, currency) {}
-
   render() {
-    const self = this;
-    const cards = this.state.charities.map(function (item, i) {
-      const payments = [10, 20, 50, 100, 500].map((amount, j) => (
-        <label key={j}>
-          <input
-            type="radio"
-            name="payment"
-            onClick={function () {
-              self.setState({ selectedAmount: amount });
-            }}
-          />
-          {amount}
-        </label>
-      ));
-
-      return (
-        <Card key={i}>
-          <p>{item.name}</p>
-          {payments}
-          <button
-            onClick={() => {
-              self.handlePay(self, item.id, self.state.selectedAmount, item.currency);
-            }}
-          >
-            Pay
-          </button>
-          <ButtonComponent
-            onClick={() => {
-              self.onCheckClick();
-            }}
-          >
-            PAY
-          </ButtonComponent>
-        </Card>
-      );
-    });
-
     const style = {
       color: 'red',
       margin: '1em 0',
@@ -109,12 +50,11 @@ class HomePage extends Component {
     const message = this.props.message;
 
     return (
-      <div>
+      <div className="main-container">
         <h1>Omise Tamboon React</h1>
         <p>All donations: {donate}</p>
         <p style={style}>{message}</p>
-        {cards}
-        <CardComponent></CardComponent>
+        <CardComponent {...this.state}></CardComponent>
       </div>
     );
   }
