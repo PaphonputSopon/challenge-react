@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import App from './App';
 import store from './stores';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './assets/style.css';
+import './assets/scss/style.scss';
 render(
   <Provider store={store}>
     <App />

@@ -37,8 +37,8 @@ class CardComponent extends React.Component {
       const payments = [10, 20, 50, 100, 500].map((amount, j) => (
         <label key={j}>
           <input
-            type="radio"
-            name="payment"
+            type='radio'
+            name='payment'
             onChange={() => {
               console.log('self.selectedAmount ------------->>', self.state.selectedAmount);
               self.setState({ selectedAmount: amount });
@@ -51,25 +51,23 @@ class CardComponent extends React.Component {
       ));
 
       return (
-        <Card key={i} className="row card">
-          <div className="col-12 col-sm-6 ">
+        <Card key={i} className='row'>
+          <div className='col-12 col-sm-6 '>
             <p>{item.name}</p>
             <img src={`images/${item.image}`}></img>
-          </div>
-          <div className="col-12 col-sm-6">
             {payments}
             <ButtonComponent
               onClick={() => {
                 self.handlePay(this, item.id, this.props.selectedAmount, item.currency);
-              }}
-            >
+              }}>
               PAY
             </ButtonComponent>
           </div>
         </Card>
       );
     });
-    return <div className="container">{cards}</div>;
+
+    return <div className='container'>{cards}</div>;
   }
 }
 

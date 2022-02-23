@@ -3,7 +3,7 @@ import fetch from 'isomorphic-fetch';
 import { connect } from 'react-redux';
 import { summaryDonations } from '../utils/Helpers';
 import { getCharities } from '../api/charities/charities';
-import CardComponent from '../components/BardComponent';
+import CardComponent from '../components/CardComponent';
 
 class HomePage extends Component {
   constructor(props) {
@@ -51,7 +51,7 @@ class HomePage extends Component {
 
     return (
       <div className="main-container">
-        <h1>Omise Tamboon React</h1>
+        <h1 className="test-sass">Omise Tamboon React</h1>
         <p>All donations: {donate}</p>
         <p style={style}>{message}</p>
         <CardComponent {...this.state}></CardComponent>
